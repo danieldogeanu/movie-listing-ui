@@ -1,34 +1,41 @@
-# movielistingui
+# Movie Listing UI
 
-## Project setup
+Front End Challenge for [Zone Digital](https://www.zonedigital.com/)
+
+### [See Live Preview Here](https://ddev.ro/movie-listing-ui)
+
+### [See Challenge Description Here](https://zone.github.io/frontend/movie-listing-ui)
+
+## Project Setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles and Hot-Reloads for Development
 ```
 npm run serve
+npm run serve:open
 ```
 
-### Compiles and minifies for production
+### Compiles and Minifies for Production
 ```
 npm run build
 ```
 
-### Run your tests
+### Runs Tests
 ```
 npm run test
 ```
 
-### Lints and fixes files
+### Lints and Fixes Files
 ```
 npm run lint
 ```
 
-### Run your unit tests
+### Runs Unit Tests
 ```
 npm run test:unit
 ```
 
-### Customize configuration
+### Customize Configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
