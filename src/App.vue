@@ -1,18 +1,20 @@
 <template>
-  <div id="app" class="app">
+  <main id="app" class="app">
     <sprite />
     <h1 class="app__title">Movies List</h1>
     <div class="app__container">
       <sort-bar />
       <movies-grid />
+      <the-footer />
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
 import Sprite from './components/Sprite.vue';
 import SortBar from './components/SortBar.vue';
 import MoviesGrid from './components/MoviesGrid.vue';
+import Footer from './components/Footer.vue';
 
 export default {
   name: 'app',
@@ -20,6 +22,7 @@ export default {
     'sprite': Sprite,
     'sort-bar': SortBar,
     'movies-grid': MoviesGrid,
+    'the-footer': Footer,
   }
 }
 </script>

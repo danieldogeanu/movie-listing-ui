@@ -90,6 +90,10 @@ $color-scheme: (
 		alert: color(orange, carrot),
 		error: color(red, alizarin),
 	),
+	footer: (
+		link: rgba(color(blue, william), 0.4),
+		hover: rgba(color(blue, william), 0.8),
+	),
 );
 
 // 02. Font Family
