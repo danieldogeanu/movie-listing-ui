@@ -54,6 +54,7 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: rem(20);
 
 	&__dir {
 		padding: 0 rem(10);

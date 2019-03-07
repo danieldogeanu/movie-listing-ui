@@ -154,8 +154,8 @@ $m-queries: ();
 /// Function that returns the selected z-index level from the $levels array.
 /// @param $level - An integer for the level you wish to select (e.g. 8).
 /// @return Returns an integer multiplied by 100 for the selected level.
-@function level($level) {
-@return map-get($levels, $level);
+@function level($level, $sub-level: 'base') {
+@return map-get(map-get($levels, $level), $sub-level);
 }
 
 /// Function that returns the selected relative path from $paths array.

@@ -78,6 +78,12 @@ $color-scheme: (
 		btn: rgba(color(blue, william), 0.4),
 		hover: rgba(color(blue, william), 0.8),
 	),
+	moviecard: (
+		title: color(blue, william),
+		title-hover: darken(color(blue, william), 20%),
+		genres: color(blue, spray),
+		rating: rgba(color(blue, picton), 0.8),
+	),
 	state: (
 		info: color(blue, boston),
 		success: color(green, emerald),
@@ -112,6 +118,11 @@ $weights: (
 
 $levels: (
 	base: 0,
+	moviecard: (
+		img: 100,
+		overlay: 200,
+		base: 100
+	),
 );
 
 // 05. Relative Paths
