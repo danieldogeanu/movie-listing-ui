@@ -125,12 +125,14 @@ $levels: (
 
 $paths: (
 	images: (
-		base: './images/'
+		base: './assets/images/'
 	),
-	svg: (
-		base: './images/svg/',
+	icons: (
+		svg: './assets/icons/svg/',
+		png: './assets/icons/png/',
+		base: './assets/icons/'
 	),
 	fonts: (
-		base: './fonts/'
+		base: './assets/fonts/'
 	)
 );
