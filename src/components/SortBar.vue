@@ -5,15 +5,24 @@
 			<button class="sortbar__btn">Rating</button>
 		</div>
 		<div class="sortbar__dir">
-			<button class="sortbar__btn--closer">up</button>
-			<button class="sortbar__btn--closer">down</button>
+			<button class="sortbar__btn--icon">
+				<icon name="chevron-up" />
+			</button>
+			<button class="sortbar__btn--icon">
+				<icon name="chevron-down" />
+			</button>
 		</div>
 	</div>
 </template>
 
 <script>
+import Icon from './Icon.vue';
+
 export default {
-	name: 'SortBar'
+	name: 'SortBar',
+	components: {
+		'icon': Icon
+	}
 }
 </script>
 
@@ -36,19 +45,29 @@ export default {
 	}
 }
 
+%sortbtn__icon {
+	width: rem(40);
+	height: rem(40);
+}
+
 .sortbar {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 
 	&__dir {
-		padding: 0 rem(15);
+		padding: 0 rem(10);
 	}
 
 	&__btn {
 		@extend %sortbtn;
-		&--closer {
+		&--icon {
 			@extend %sortbtn;
-			margin: 0 rem(5);
+			@extend %sortbtn__icon;
+			margin: 0;
+			.icon {
+				@extend %sortbtn__icon;
+			}
 		}
 	}
 }

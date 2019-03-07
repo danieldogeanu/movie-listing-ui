@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="app">
+    <sprite />
     <h1 class="app__title">Movie List</h1>
     <div class="app__container">
       <sort-bar />
@@ -8,12 +9,14 @@
 </template>
 
 <script>
+import Sprite from './components/Sprite.vue';
 import SortBar from './components/SortBar.vue';
 
 export default {
   name: 'app',
   components: {
-    'sort-bar': SortBar
+    'sprite': Sprite,
+    'sort-bar': SortBar,
   }
 }
 </script>
