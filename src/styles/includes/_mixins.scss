@@ -1,0 +1,186 @@
+//  Mixins
+//  ----------------------------------------------------------------------------
+//
+//  Table of Contents:
+//
+//   01. Media Queries Breakpoints
+//   02. Browser Specific Prefixes
+//	 03. Other Mixins
+
+
+// 01. Media Queries Breackpoints
+// -----------------------------------------------------------------------------
+
+/// Generates single media query.
+/// @param $size - The 'min' or 'max' keyword, necessary for the direction of the breakpoint.
+/// @param $point - The viewport width or height in pixels (without 'px' unit) where you wish the breakpoint to take action.
+/// @param $dir - The direction of the breakpoint ('width' or 'height').
+@mixin breakpoint($size, $point, $dir: width) {
+	@if (is-size($size) and is-dir($dir)) {
+		@media (#{$size}-#{$dir}: $point) { @content; }
+	}
+}
+
+/// Generates single media query for a range of viewport widths or heights.
+/// @param $point-one - The minimum viewport width or height in pixels (without 'px' unit).
+/// @param $point-two - The maximum viewport width or height in pixels (without 'px' unit).
+/// @param $dir - The direction of the breakpoint ('width' or 'height').
+@mixin breakbetween($point-one, $point-two, $dir: width) {
+	@if is-dir($dir) {
+		@media (min-#{$dir}: $point-one) and (max-#{$dir}: $point-two) { @content; }
+	}
+}
+
+/// Generates single media query for a range of viewport widths or heights and one extra breakpoint (3 conditions).
+/// @param $point-one - The minimum viewport width or height in pixels (without 'px' unit).
+/// @param $point-two - The maximum viewport width or height in pixels (without 'px' unit).
+/// @param $size - The size of the third condition of the breakpoint ('min' or 'max').
+/// @param $point-three - The third condition viewport width or height in pixels (without 'px' unit).
+/// @param $dir-one - The direction of the range of viewports ('width' or 'height').
+/// @param $dir-two - The direction of the third condition breakpoint ('width' or 'height').
+@mixin breakbetween-and($point-one, $point-two, $size, $point-three, $dir-one: width, $dir-two: height) {
+	@if (is-size($size) and is-dir($dir-one) and is-dir($dir-two)) {
+		@media (min-#{$dir-one}: $point-one) and (max-#{$dir-one}: $point-two) and (#{$size}-#{$dir-two}: $point-three) { @content; }
+	}
+}
+
+/// Generates single media query for orientation of the viewport.
+/// @param $ori - The orientation of the viewport ('landscape' or 'portrait').
+@mixin orientation($ori) {
+	@if is-ori($ori) {
+		@media (orientation: $ori) { @content; }
+	}
+}
+
+/// Generates single media query for both size and orientation of the viewport.
+/// @param $size - The 'min' or 'max' keyword, necessary for the direction of the breakpoint.
+/// @param $point - The viewport width or height in pixels (without 'px' unit) where you wish the breakpoint to take action.
+/// @param $ori - The orientation of the viewport ('landscape' or 'portrait').
+/// @param $dir - The direction of the breakpoint ('width' or 'height').
+@mixin breakpoint-orientation($size, $point, $ori, $dir: width) {
+	@if (is-size($size) and is-ori($ori) and is-dir($dir)) {
+		@media (#{$size}-#{$dir}: $point) and (orientation: $ori) { @content; }
+	}
+}
+
+/// Generates single media query for a range of viewport sizes and one viewport orientation.
+/// @param $point-one - The minimum viewport width or height in pixels (without 'px' unit).
+/// @param $point-two - The maximum viewport width or height in pixels (without 'px' unit).
+/// @param $ori - The orientation of the viewport ('landscape' or 'portrait').
+/// @param $dir - The direction of the breakpoint ('width' or 'height').
+@mixin breakbetween-orientation($point-one, $point-two, $ori, $dir: width) {
+	@if (is-ori($ori) and is-dir($dir)) {
+		@media (min-#{$dir}: $point-one) and (max-#{$dir}: $point-two) and (orientation: $ori) { @content; }
+	}
+}
+
+/// Generates single media query with two different conditions for width and height (default is width and height).
+/// @param $size-one - The size of the first condition ('min' or 'max').
+/// @param $point-one - The viewport width or height in pixels (without 'px' unit) of the first condition.
+/// @param $size-two - The size of the second condition ('min' or 'max').
+/// @param $point-two - The viewport width or height in pixels (without 'px' unit) of the second condition.
+/// @param $dir-one - The direction of the first condition ('width' or 'height').
+/// @param $dir-two - The direction of the second condition ('width' or 'height').
+@mixin breakpoint-double($size-one, $point-one, $size-two, $point-two, $dir-one: width, $dir-two: height) {
+	@if (is-size($size-one) and is-dir($dir-one) and is-size($size-two) and is-dir($dir-two)) {
+		@media (#{$size-one}-#{$dir-one}: $point-one) and (#{$size-two}-#{$dir-two}: $point-two) { @content; }
+	}
+}
+
+/// Generates multiple media queries, with different conditions, separated by comma.
+/// @param $b-points - An array of arrays in the form ( ($size, $point, $dir), (min, rem(560), width) ).
+@mixin multiple-breakpoints($b-points) {
+	@media #{build-queries($b-points)} { @content; }
+}
+
+// 02. Browser Specific Prefixes
+// -----------------------------------------------------------------------------
+
+/// Adds browser prefixes to box-sizing CSS property.
+/// We do this because the autoprefixer doesn't add prefixes for box-sizing and older browsers might need it.
+/// @param $sizing - The sizing value for box-sizing CSS property (border-box, content-box, etc).
+@mixin box-sizing($sizing) {
+	$properties: add-prefixes(box-sizing);
+	@each $property in $properties { #{$property}: $sizing; }
+}
+
+/// Adds browser prefixes to box-shadow CSS property.
+/// Again, we do it this way because the autoprefixer doesn't do it, but we still need it.
+/// @param $horizontal-offset - The horizontal offset for the shadow.
+/// @param $vertical-offset - The vertical offset for the shadow.
+/// @param $blur-radius - The blur radius of the shadow.
+/// @param $spread-radius - The spread radius of the shadow.
+/// @param $shadow-color - The color for the shadow, used in the rgba() function.
+/// @param $shadow-opacity - The opacity of the color for the shadow, used in the rgba() function.
+@mixin box-shadow($horizontal-offset, $vertical-offset, $blur-radius, $spread-radius, $shadow-color, $shadow-opacity) {
+	$properties: add-prefixes(box-shadow);
+	@each $property in $properties {
+		#{$property}: $horizontal-offset $vertical-offset $blur-radius $spread-radius rgba($shadow-color, $shadow-opacity);
+	}
+}
+
+/// Adds browser prefixes for linear-gradient CSS property.
+/// @param $direction - The direction of the gradient (e.g. left, right, top, bottom).
+/// @param $start-color - The first color stop from which to start the gradient.
+/// @param $start-location - The location from which the first color stop starts.
+/// @param $end-color - The last color stop, with which to end the gradient.
+/// @param $end-location - The location where the last color stop ends.
+@mixin linear-gradient($direction, $start-color, $start-location, $end-color, $end-location) {
+	$properties: add-prefixes(linear-gradient);
+	@each $property in $properties {
+		@if ($property == 'linear-gradient') { $direction: #{'to ' + reverse-direction($direction)}; }
+		background: #{$property + '('}$direction, $start-color $start-location, $end-color $end-location#{')'};
+	}
+}
+
+// 03. Other Mixins
+// -----------------------------------------------------------------------------
+
+/// Mixin that generates the CSS for consecutive animation delays for multiple elements.
+/// Used for lists of items (like a menu) that needs to slide each element with slight delay in animation.
+/// @param $repeats - The number of items that is contained in the list.
+/// @param $start - The value (in seconds, without s) to start with. 
+/// @param $increments - The ammount we want to increment the delay for each item.
+@mixin repeat-animation-delay($repeats, $start, $increments) {
+	$value: $start;
+	@for $i from 1 through $repeats {
+		&:nth-child(#{$i}) { animation-delay: #{$value}s; }
+		$value: $value + $increments;
+	}
+}
+
+/// Shorthand for outline CSS property, used for debugging layouts.
+/// @param $color - The color of the outline.
+@mixin outline($color) {
+	outline: 1px dotted $color;
+}
+
+/// Generates placeholder pseudo-selector with all browser prefixes.
+/// Each CSS rule must be completely separate, and not separated by comma.
+/// The browsers have no idea what to select if we separate by comma.
+@mixin placeholders() {
+	$placeholders: ('::-webkit-input-placeholder', '::-moz-placeholder', ':-ms-input-placeholder', '::placeholder');
+	@each $placeholder in $placeholders { &#{$placeholder} { @content; } }
+}
+
+/// Generate separate rules for each element in the array.
+/// Each CSS rule is completely separate and not separated by comma.
+/// We do this because browsers sometime have no idea what rule to select if they're separated by commas.
+/// This is especially the case when using browser-specific pseudo-elements.
+/// @param $array - An array with elements or pseudo-elements that have common styles.
+@mixin separate($array: null) {
+	@if ($array) { @each $item in $array { &#{$item} { @content; } } }
+}
+
+/// Formula for fluid font calculation that uses the viewport width to dynamically scale the font.
+/// IMPORTANT: You must pass unitless (pixel) values to this mixin (no px or rem at the end).
+/// This takes the pixel values and converts them automatically to rems.
+/// @param $min-width - Minimum viewport width (in rem) that this can take effect.
+/// @param $max-width - Maximum viewport width (in rem) that this can take effect.
+/// @param $min-font - Minimum font size (in rem) from which to scale up.
+/// @param $max-font - Maximum font size (in rem) up until which to scale up.
+@mixin fluid-type($min-width, $max-width, $min-font, $max-font) {
+	$font-difference: (clean-rem($max-font) - clean-rem($min-font));
+	$width-difference: (clean-rem($max-width) - clean-rem($min-width));
+	font-size: calc(#{rem($min-font)} + #{$font-difference} * (100vw - #{rem($min-width)}) / #{$width-difference});
+}

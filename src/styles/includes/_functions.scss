@@ -1,0 +1,167 @@
+//  Functions
+//  ----------------------------------------------------------------------------
+//
+//  Table of Contents:
+//
+//   01. String Manipulation
+//   02. Units Calculations
+//	 04. Media Query Functions
+//   05. Functions for Variables
+
+// 01. String Manipulation
+// -----------------------------------------------------------------------------
+
+/// Function that replaces a substring in a string.
+/// @param $string - The string in which we wanna replace (haystack).
+/// @param $search - The substring to find and to replace (needle).
+/// @param $replace - The replacement for the substring (replacement for the needle).
+@function str-replace($string, $search, $replace: '') {
+	$index: str-index($string, $search);
+	@if $index {
+			@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
+	@return $string;
+}
+
+/// Function that adds browser prefixes for CSS properties.
+/// @param $prop - The CSS property you want to prefix.
+/// @return Returns a comma separated list of prefixed properties.
+@function add-prefixes($prop) {
+$prefixes: ('-webkit', '-moz'); $properties: ();
+@each $item in $prefixes { $properties: append($properties, unquote('#{unquote($item)}-#{$prop}'), 'comma'); }
+$properties: append($properties, unquote('#{$prop}'), 'comma');
+@return $properties;
+}
+
+/// Function that returns the oposite direction.
+/// @param $dir - The direction string that you need reversed (e.g. left, right, top, bottom).
+/// @return Returns the direction string reversed.
+@function reverse-direction($dir) {
+@if ($dir == 'left') { @return 'right'; }
+@if ($dir == 'right') { @return 'left'; }
+@if ($dir == 'top') { @return 'bottom'; }
+@if ($dir == 'bottom') { @return 'top'; }
+}
+
+// 02. Units Calculations
+// -----------------------------------------------------------------------------
+
+/// Converts pixel values into rems.
+/// On most devices 1rem = 16px, so we use the default value here.
+/// @param $value - The pixel value to convert into rems (without 'px' at the end).
+/// @return Returns a string with the converted value and 'rem' unit appended at the end.
+@function rem($value) {
+	@return #{($value / 16) + 'rem'};
+}
+
+/// Converts pixel values into rems.
+/// This function doesn't append 'rem' unit at the end of calculated value.
+/// @param $value - The pixel value to convert into rems (without 'px' at the end).
+/// @return Returns a number that can be used in further calculations.
+@function clean-rem($value) {
+	@return $value / 16;
+}
+
+/// Converts pixel values into ems.
+/// The em value is always calculated by the font size of the current element.
+/// @param $value - The pixel value to convert into ems (without 'px' at the end).
+/// @param $font-size - The font size of the current element.
+/// @return Returns a string with the converted value and 'em' unit appended at the end.
+@function em($value, $font-size) {
+	@return #{($value / $font-size) + 'em'};
+}
+
+/// Converts pixel values into a percent of the container.
+/// @param $target - The width or height you wish to convert (without 'px' at the end).
+/// @param $container - The width or height of the container (without 'px' at the end).
+/// @return Returns a string with the converted value and '%' unit appended at the end.
+@function pc($target, $container) {
+	@return #{(($target / $container) * 100) + '%'};
+}
+
+// 04. Media Query Functions
+// -----------------------------------------------------------------------------
+
+/// Function that tests if the value passed is 'min' or 'max' keywords.
+/// This function is used in breakpoints mixins.
+/// @param $size - The keyword to test.
+/// @return Returns true or false, based on the result of the test.
+@function is-size($size) {
+@return ($size == min or $size == max);
+}
+
+/// Function that tests if the value passed is 'width' or 'height' keywords.
+/// This function is used in breakpoints mixins.
+/// @param $dir - The keyword to test.
+/// @return Returns true or false, based on the result of the test.
+@function is-dir($dir) {
+@return ($dir == width or $dir == height);
+}
+
+/// Function that tests if the value passed is 'portrait' or 'landscape' keywords.
+/// This function is used in breakpoints mixins.
+/// @param $ori - The keyword to test.
+/// @return Returns true or false, based on the result of the test.
+@function is-ori($ori) {
+@return ($ori == portrait or $ori == landscape);
+}
+
+/// Function that builds the media queries required for multiple-breakpoints() mixin.
+/// @param $b-points - An array of arrays in the form ( ($size, $point, $dir), (min, rem(560), width) ).
+/// @return Returns a string of media queries separated by comma to be used in the multiple-breakpoints() mixin.
+@function build-queries($b-points) {
+$m-queries: ();
+@each $item in $b-points {
+	$size: nth($item, 1); $point: nth($item, 2); $dir: nth($item, 3);
+	$m-queries: append($m-queries, unquote('(#{$size}-#{$dir}: #{$point})'), 'comma');
+}
+@return $m-queries;
+}
+
+// 05. Functions for Variables
+// -----------------------------------------------------------------------------
+
+/// Function that selects and returns a color from the $colors array.
+/// @param $color - The color name you wish to select (e.g. yellow).
+/// @param $tone - The tone/variant for the selected color (e.g. west-side for orange).
+/// @return Returns the hex code for the selected color.
+@function color($color, $tone: 'base') {
+@return map-get(map-get($colors, $color), $tone);
+}
+
+/// Function that selects and returns the color of an element from the $color-scheme array.
+/// @param $element - The name of the element that you wish to retrieve the color for.
+/// @return Returns the hex code for the selected color.
+@function color-scheme($element, $sub-element: null) {
+@if ($sub-element) { @return map-get(map-get($color-scheme, $element), $sub-element); }
+@else { @return map-get($color-scheme, $element); }
+}
+
+/// Function that returns the selected font family from the $fonts array.
+/// @param $font - The name of the font family you wish to retrieve.
+/// @return Returns the selected font family.
+@function font($font) {
+@return map-get($fonts, $font);
+}
+
+/// Function that returns the selected font weight from the $weights array.
+/// @param $weight - The name of the weight you wish to retrieve (e.g. bold).
+/// @return Returns an integer for the selected weight.
+@function weight($weight) {
+@return map-get($weights, $weight);
+}
+
+/// Function that returns the selected z-index level from the $levels array.
+/// @param $level - An integer for the level you wish to select (e.g. 8).
+/// @return Returns an integer multiplied by 100 for the selected level.
+@function level($level) {
+@return map-get($levels, $level);
+}
+
+/// Function that returns the selected relative path from $paths array.
+/// @param $path - The name of the relative path you wish to retrieve (e.g. img).
+/// @param $sub-path - The name of the subfolder you wish to retrieve for the specified path.
+/// @return Returns a string with the relative path for the selected folder.
+@function path($path, $sub-path: 'base') {
+@return map-get(map-get($paths, $path), $sub-path);
+}

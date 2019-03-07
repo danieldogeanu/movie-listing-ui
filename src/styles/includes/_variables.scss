@@ -1,0 +1,136 @@
+//  Variables
+//  ----------------------------------------------------------------------------
+//
+//  Table of Contents:
+//
+//   01. Color Scheme
+//   02. Font Family
+//   03. Font Weights
+//   04. Z-Index Scale
+//	 05. Relative Paths
+
+
+// 01. Color Scheme
+// -----------------------------------------------------------------------------
+
+$colors: (
+	white: (
+		base: #ffffff,
+		seashell: #f1f1f1,
+		mercury: #e5e5e5,
+		clouds: #ecf0f1
+	),
+	gray: (
+		silver: #c4c4c4,
+		silver-alt: #bdc3c7,
+		nobel: #b7b7b7,
+		chalice: #a7a7a7,
+		base: gray,
+		dove: #6e6e6e,
+		concrete: #95a5a6,
+		asbestos: #7f8c8d,
+		asphalt: #34495e,
+		midnight: #2c3e50
+	),
+	black: (
+		base: #000000
+	),
+	blue: (
+		spray: #83D4F2,
+		picton: #3ABFEF,
+		boston: #2E96BC,
+		william: #3D626F,
+		blumine: #1B596F,
+		base: blue
+	),
+	green: (
+		emerald: #2ecc71,
+		nephritis: #27ae60,
+		base: green
+	),
+	yellow: (
+		base: #ffcc00,
+		sunflower: #f1c40f
+	),
+	orange: (
+		base: #f39c12,
+		carrot: #e67e22,
+		pumpkin: #d35400,
+	),
+	red: (
+		alizarin: #e74c3c,
+		pomegranate: #c0392b,
+		base: red
+	)
+);
+
+$color-scheme: (
+	selection: (
+		bg: color(black),
+		text: color(white),
+	),
+	global: (
+		bg: color(white, seashell),
+		title: color(blue, picton),
+		text: color(blue, william),
+	),
+	state: (
+		info: color(blue, boston),
+		success: color(green, emerald),
+		alert: color(orange, carrot),
+		error: color(red, alizarin),
+	),
+);
+
+// 02. Font Family
+// -----------------------------------------------------------------------------
+
+$fonts: (
+	open-sans: ('Open Sans', sans-serif),
+	rubik: ('Rubik', sans-serif)
+);
+
+// 03. Font Weights
+// -----------------------------------------------------------------------------
+
+$weights: (
+	light: 300,
+	regular: 400,
+	medium: 500,
+	semi-bold: 600,
+	bold: 700,
+	extra-bold: 800,
+	black: 900
+);
+
+// 04. Z-Index Scale
+// -----------------------------------------------------------------------------
+
+$levels: (
+	0: 0,
+	1: 100,
+	2: 200,
+	3: 300,
+	4: 400,
+	5: 500,
+	6: 600,
+	7: 700,
+	8: 800,
+	9: 900,
+	10: 1000
+);
+
+// 05. Relative Paths
+// -----------------------------------------------------------------------------
+
+$paths: (
+	images: (
+		base: './images/'
+	),
+	svg: (
+		base: './images/svg/',
+	),
+	fonts: (
+		base: './fonts/'
+	)
+);
