@@ -74,6 +74,10 @@ $color-scheme: (
 		title: color(blue, picton),
 		txt: color(blue, william),
 	),
+	sortbar: (
+		btn: rgba(color(blue, william), 0.4),
+		hover: rgba(color(blue, william), 0.8),
+	),
 	state: (
 		info: color(blue, boston),
 		success: color(green, emerald),

@@ -1,13 +1,20 @@
 <template>
   <div id="app" class="app">
     <h1 class="app__title">Movie List</h1>
+    <div class="app__container">
+      <sort-bar />
+    </div>
   </div>
 </template>
 
 <script>
+import SortBar from './components/SortBar.vue';
+
 export default {
   name: 'app',
-  components: {}
+  components: {
+    'sort-bar': SortBar
+  }
 }
 </script>
 
@@ -27,6 +34,12 @@ export default {
     text-transform: uppercase;
     text-align: center;
     color: color-scheme(global, title);
+  }
+  &__container {
+    display: block;
+    width: 100%;
+    max-width: rem(1050);
+    margin: 0 auto;
   }
 }
 </style>
