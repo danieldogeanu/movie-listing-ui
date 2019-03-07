@@ -13,6 +13,7 @@ export default {
 
 <style lang="scss">
 @import './styles/includes';
+@import './styles/global';
 
 .app {
   &__title {

@@ -1,0 +1,33 @@
+// Base Styles
+// -----------------------------------------------------------------------------
+
+@include separate(('::-moz-selection', '::selection')) {
+	background: color-scheme(selection, bg);
+	color: color-scheme(selection, txt);
+	text-shadow: none;
+}
+
+* {
+	margin: 0; padding: 0;
+	@include box-sizing(border-box);
+	&:focus, &:active { outline: none; }
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+html {
+	font-size: 100%;
+	line-height: 1.5;
+}
+
+body {
+	background-color: color-scheme(global, bg);
+	font-family: font(open-sans);
+	font-weight: weight(light);
+	color: color-scheme(global, txt);
+}
+
+a { text-decoration: none; }

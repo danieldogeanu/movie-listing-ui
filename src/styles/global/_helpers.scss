@@ -1,0 +1,104 @@
+// Helper Styles
+// -----------------------------------------------------------------------------
+// 01. Visibility
+// 02. Float
+// 03. Clearfix
+
+
+// 01. Visibility
+// -----------------------------------------------------------------------------
+
+.hide { display: none !important; }
+
+.visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	width: rem(1);
+	height: rem(1);
+	margin: rem(-1);
+	padding: 0;
+	overflow: hidden;
+	position: absolute;
+	&.focusable {
+		&:active,
+		&:focus {
+			clip: auto;
+			height: auto;
+			margin: 0;
+			overflow: visible;
+			position: static;
+			width: auto;
+		}
+	}
+}
+
+.invisible { visibility: hidden; }
+
+.show-for-screen-reader {
+	position: absolute !important;
+	width: rem(1);
+	height: rem(1);
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+}
+
+.show-on-focus {
+	position: absolute !important;
+	width: rem(1);
+	height: rem(1);
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	&:active,
+	&:focus {
+		position: static !important;
+		height: auto;
+		width: auto;
+		overflow: visible;
+		clip: auto;
+	}
+}
+
+.show-for-landscape,
+.hide-for-portrait {
+	display: block !important;
+	@include orientation(landscape) { display: block !important; }
+	@include orientation(portrait) { display: none !important; }
+}
+
+.hide-for-landscape,
+.show-for-portrait {
+	display: none !important;
+	@include orientation(landscape) { display: none !important; }
+	@include orientation(portrait) { display: block !important; }
+}
+
+.overflow-hidden { overflow: hidden !important; }
+
+// 02. Float
+// -----------------------------------------------------------------------------
+
+.float-left { float: left !important; }
+.float-right { float: right !important; }
+
+.float-center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+// 03. Clearfix
+// -----------------------------------------------------------------------------
+
+.clearfix {
+	*zoom: 1;
+	visibility: hidden;
+	&::before {
+		content: ' ';
+		display: table;
+	}
+	&::after {
+		content: ' ';
+		display: table;
+		clear: both;
+	}
+}
