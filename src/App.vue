@@ -32,6 +32,7 @@ export default {
   &__title {
     display: block;
     width: 100%;
+    padding-left: rem(40);
     margin: rem(60) 0;
     font-family: font(montserrat);
     font-weight: weight(regular);
