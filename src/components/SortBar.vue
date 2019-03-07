@@ -5,10 +5,10 @@
 			<button class="sortbar__btn">Rating</button>
 		</div>
 		<div class="sortbar__dir">
-			<button class="sortbar__btn--icon">
+			<button class="sortbar__btn--icon" title="Ascending">
 				<icon name="chevron-up" />
 			</button>
-			<button class="sortbar__btn--icon">
+			<button class="sortbar__btn--icon" title="Descending">
 				<icon name="chevron-down" />
 			</button>
 		</div>
@@ -57,7 +57,7 @@ export default {
 	margin-bottom: rem(20);
 
 	&__dir {
-		padding: 0 rem(10);
+		padding: 0 rem(15);
 	}
 
 	&__btn {
