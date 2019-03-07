@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
     <sprite />
-    <h1 class="app__title">Movie List</h1>
+    <h1 class="app__title">Movies List</h1>
     <div class="app__container">
       <sort-bar />
       <movies-grid />
