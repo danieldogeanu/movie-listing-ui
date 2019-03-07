@@ -4,6 +4,7 @@
     <h1 class="app__title">Movie List</h1>
     <div class="app__container">
       <sort-bar />
+      <movies-grid />
     </div>
   </div>
 </template>
@@ -11,12 +12,14 @@
 <script>
 import Sprite from './components/Sprite.vue';
 import SortBar from './components/SortBar.vue';
+import MoviesGrid from './components/MoviesGrid.vue';
 
 export default {
   name: 'app',
   components: {
     'sprite': Sprite,
     'sort-bar': SortBar,
+    'movies-grid': MoviesGrid,
   }
 }
 </script>
