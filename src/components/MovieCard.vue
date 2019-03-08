@@ -1,5 +1,5 @@
 <template>
-	<a href="#" class="moviecard">
+	<a href="#" class="moviecard" @click.prevent="">
 		<div class="moviecard__wrap">
 			<div class="moviecard__overlay">
 				<div class="moviecard__inneroverlay">
