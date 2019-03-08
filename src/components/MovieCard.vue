@@ -29,29 +29,49 @@ export default {
 <style scoped lang="scss">
 @import '../styles/includes';
 
-.moviecard {
+%inneroverlay-text {
+	font-family: font(open-sans);
+	text-transform: uppercase;
+	line-height: 1;
+}
+
+%block {
 	display: block;
+	width: 100%;
+	&--auto {
+		@extend %block;
+		height: auto;
+	}
+	&--full {
+		@extend %block;
+		height: 100%;
+	}
+}
+
+%border-radius {
+	border-radius: rem(6);
+}
+
+.moviecard {
+	@extend %block;
 
 	&__wrap {
-		width: 100%;
-		height: auto;
+		@extend %block--auto;
+		@extend %border-radius;
 		position: relative;
-		border-radius: rem(6);
 		overflow: hidden;
 		@include box-shadow(0, 0, rem(80), rem(1), color(black), 0.2);
 	}
 
 	&__overlay {
-		display: block;
+		@extend %block--full;
+		@extend %border-radius;
 		opacity: 0;
-		width: 100%;
-		height: 100%;
 		position: absolute;
 		top: 0; left: 0;
 		z-index: level(moviecard, overlay);
 		@include linear-gradient(top, rgba(black, 0.2), 0%, rgba(black, 0.9), 70%);
 		transition: opacity .2s ease;
-		border-radius: rem(6);
 	}
 
 	&__inneroverlay {
@@ -66,41 +86,34 @@ export default {
 	}
 
 	&__genre {
+		@extend %inneroverlay-text;
 		margin-bottom: rem(15);
-		font-family: font(open-sans);
 		font-weight: weight(regular);
 		font-size: rem(14);
-		text-transform: uppercase;
-		line-height: 1;
 		color: color-scheme(moviecard, genres);
 	}
 
 	&__rating {
-		font-family: font(open-sans);
+		@extend %inneroverlay-text;
 		font-weight: weight(semi-bold);
 		font-size: rem(38);
-		text-transform: uppercase;
-		line-height: 1;
 		color: color-scheme(moviecard, rating);
 	}
 
 	&__img {
+		@extend %block--auto;
+		@extend %border-radius;
 		position: relative;
 		z-index: level(moviecard, img);
-		width: 100%;
-		height: auto;
-		margin-bottom: rem(-6);
-		border-radius: rem(6);
 	}
 
 	&__title {
-		display: block;
-		width: 100%;
+		@extend %block;
 		margin-top: rem(15);
+		text-align: center;
+		font-size: rem(20);
 		font-family: font(montserrat);
 		font-weight: weight(semi-bold);
-		font-size: rem(20);
-		text-align: center;
 		color: color-scheme(moviecard, title);
 		transition: color .2s ease;
 	}
