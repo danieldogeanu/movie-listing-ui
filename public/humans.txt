@@ -1,0 +1,14 @@
+# humanstxt.org/
+# The Humans Responsible & Technology Colophon
+
+# TEAM
+
+	Daniel Dogeanu -- Web Developer -- @danieldogeanu
+
+# TECHNOLOGY COLOPHON
+
+	HTML5, CSS3, SVG
+	Normalize, Animate
+	JavaScript, ES6, Fetch API, JSON, Modernizr
+	Vue, Babel, Webpack, SASS
+	Git, BitBucket
