@@ -51,6 +51,7 @@ export default {
 		z-index: level(moviecard, overlay);
 		@include linear-gradient(top, rgba(black, 0.2), 0%, rgba(black, 0.9), 70%);
 		transition: opacity .2s ease;
+		border-radius: rem(6);
 	}
 
 	&__inneroverlay {
@@ -89,6 +90,7 @@ export default {
 		width: 100%;
 		height: auto;
 		margin-bottom: rem(-6);
+		border-radius: rem(6);
 	}
 
 	&__title {
