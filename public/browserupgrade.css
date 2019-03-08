@@ -9,6 +9,7 @@ body { background-color: #f1f1f1; }
 	color: #e74c3c;
 	font-family: sans-serif;
 	font-size: 20px;
+	font-weight: bold;
 	text-align: center;
 	box-sizing: border-box;
 }
@@ -16,9 +17,7 @@ body { background-color: #f1f1f1; }
 #browserupgrade a {
 	color: #e74c3c;
 	text-decoration: underline;
-	font-weight: bold;
 }
-#browserupgrade strong { font-weight: bold; }
 .no-js #browserupgrade { display: none; }
 .no-js noscript {
 	display: block;
@@ -28,6 +27,7 @@ body { background-color: #f1f1f1; }
 	color: #e74c3c;
 	font-family: sans-serif;
 	font-size: 20px;
+	font-weight: bold;
 	text-align: center;
 	box-sizing: border-box;
 }
