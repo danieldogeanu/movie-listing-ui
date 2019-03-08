@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       appTitle: 'Movies List',
+      nowPlaying: [],
     }
   },
   components: {
@@ -30,6 +31,11 @@ export default {
     'sort-bar': SortBar,
     'movies-grid': MoviesGrid,
     'the-footer': Footer,
+  },
+  created() {
+    fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=2b5d51509f0a6ce82c2f8965762ff228')
+      .then(res => res.json())
+      .then(json => this.nowPlaying = json.results);
   }
 }
 </script>
