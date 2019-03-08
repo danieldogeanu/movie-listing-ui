@@ -34,5 +34,12 @@ export default {
 		grid-template: auto / repeat(4, 1fr);
 		gap: rem(60) rem(30);
 	}
+
+	.no-cssgrid & {
+		display: table;
+		width: 100%;
+		grid-template: none;
+		gap: 0;
+	}
 }
 </style>

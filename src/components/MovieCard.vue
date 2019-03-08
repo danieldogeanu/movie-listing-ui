@@ -125,5 +125,25 @@ export default {
 	&:hover &__overlay {
 		opacity: 1;
 	}
+
+	.no-cssgrid & {
+		display: table-cell;
+		vertical-align: top;
+		float: left;
+		width: 100%;
+		padding: 0 0 rem(30) 0;
+		@include breakpoint(min, rem(421)) {
+			padding: 0 rem(10) rem(40) rem(10);
+			width: 50%;
+		}
+		@include breakpoint(min, rem(641)) {
+			padding: 0 rem(12.5) rem(50) rem(12.5);
+			width: 33.33333333333333%;
+		}
+		@include breakpoint(min, rem(861)) {
+			padding: 0 rem(15) rem(60) rem(15);
+			width: 25%;
+		}
+	}
 }
 </style>

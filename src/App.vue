@@ -49,6 +49,9 @@ export default {
     width: 100%;
     max-width: rem(1050);
     margin: 0 auto;
+    .no-cssgrid & {
+      max-width: rem(1080);
+    }
   }
 }
 </style>
