@@ -172,15 +172,16 @@
 	@if ($array) { @each $item in $array { &#{$item} { @content; } } }
 }
 
-/// Formula for fluid font calculation that uses the viewport width to dynamically scale the font.
-/// IMPORTANT: You must pass unitless (pixel) values to this mixin (no px or rem at the end).
-/// This takes the pixel values and converts them automatically to rems.
+/// Formula for fluid property calculation that uses the viewport width to dynamically scale the property.
+/// IMPORTANT: 	You must pass unitless (pixel) values to this mixin (no px or rem at the end).
+/// 						This takes the pixel values and converts them automatically to rems.
+/// @param $prop - Property to scale dynamically. Can be any property that accepts one single rem value.
 /// @param $min-width - Minimum viewport width (in rem) that this can take effect.
 /// @param $max-width - Maximum viewport width (in rem) that this can take effect.
-/// @param $min-font - Minimum font size (in rem) from which to scale up.
-/// @param $max-font - Maximum font size (in rem) up until which to scale up.
-@mixin fluid-type($min-width, $max-width, $min-font, $max-font) {
-	$font-difference: (clean-rem($max-font) - clean-rem($min-font));
+/// @param $min-size - Minimum property size (in rem) from which to scale up.
+/// @param $max-size - Maximum property size (in rem) up until which to scale up.
+@mixin fluid-prop($prop, $min-width, $max-width, $min-size, $max-size) {
+	$size-difference: (clean-rem($max-size) - clean-rem($min-size));
 	$width-difference: (clean-rem($max-width) - clean-rem($min-width));
-	font-size: calc(#{rem($min-font)} + #{$font-difference} * (100vw - #{rem($min-width)}) / #{$width-difference});
+	#{$prop}: calc(#{rem($min-size)} + #{$size-difference} * (100vw - #{rem($min-width)}) / #{$width-difference});
 }
