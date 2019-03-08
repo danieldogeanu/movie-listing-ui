@@ -36,6 +36,7 @@ export default {
 
 <style lang="scss">
 @import './styles/includes';
+@import './styles/plugins';
 @import './styles/global';
 
 .app {
