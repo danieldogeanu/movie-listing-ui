@@ -1,18 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="ie">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="<%= BASE_URL %>browserupgrade.css" />
     <title>Movies List</title>
     <script src="<%= BASE_URL %>modernizr.js"></script>
   </head>
   <body>
+    <p id="browserupgrade">You are using an <strong>obsolete</strong> browser. Please <a href="http://browsehappy.com/" target="_blank">install a modern browser</a> to be able to view this website.</p>
     <noscript>
       <strong>We're sorry but Movies List doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <script>
+        // Delay showing browserupgrade until the page has loaded.
+        // This way it doesn't flash in other browsers before Vue loads.
+        window.onload = function() {
+          var browserupgrade = document.getElementById('browserupgrade');
+          if (browserupgrade) browserupgrade.className += ' show';
+        };
+      </script>
   </body>
 </html>

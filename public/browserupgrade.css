@@ -1,0 +1,33 @@
+/* NOTE: Don't replace pixels with em or rem. IE doesn't know about those. */
+body { background-color: #f1f1f1; }
+#browserupgrade {
+	display: none;
+	width: 100%;
+	max-width: 730px;
+	margin: 200px auto 0 auto;
+	padding: 40px;
+	color: #e74c3c;
+	font-family: sans-serif;
+	font-size: 20px;
+	text-align: center;
+	box-sizing: border-box;
+}
+#browserupgrade.show { display: block; }
+#browserupgrade a {
+	color: #e74c3c;
+	text-decoration: underline;
+	font-weight: bold;
+}
+#browserupgrade strong { font-weight: bold; }
+.no-js #browserupgrade { display: none; }
+.no-js noscript {
+	display: block;
+	width: 730px;
+	margin: 200px auto 0 auto;
+	padding: 40px;
+	color: #e74c3c;
+	font-family: sans-serif;
+	font-size: 20px;
+	text-align: center;
+	box-sizing: border-box;
+}

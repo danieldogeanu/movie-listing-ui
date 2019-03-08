@@ -10,7 +10,8 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "vue": "^2.6.6"
+    "vue": "^2.6.6",
+    "vue-browser-detect-plugin": "^0.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
