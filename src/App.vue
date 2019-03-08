@@ -4,7 +4,7 @@
     <div class="app__container">
       <the-header :title="appTitle" />
       <sort-bar />
-      <movies-grid />
+      <movies-grid :movies="nowPlaying" :config="moviesConfig" />
       <the-footer />
     </div>
   </main>
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       appTitle: 'Movies List',
+      moviesConfig: {},
       nowPlaying: [],
     }
   },
@@ -33,7 +34,11 @@ export default {
     'the-footer': Footer,
   },
   created() {
-    fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=2b5d51509f0a6ce82c2f8965762ff228')
+    const API_KEY = '2b5d51509f0a6ce82c2f8965762ff228';
+    fetch('https://api.themoviedb.org/3/configuration?api_key=' + API_KEY)
+      .then(res => res.json())
+      .then(json => this.moviesConfig = json);
+    fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=' + API_KEY)
       .then(res => res.json())
       .then(json => this.nowPlaying = json.results);
   }

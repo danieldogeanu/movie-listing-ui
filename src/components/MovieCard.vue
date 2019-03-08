@@ -1,5 +1,5 @@
 <template>
-	<a href="#" class="moviecard" @click.prevent="">
+	<a href="#" class="moviecard" @click.prevent>
 		<div class="moviecard__wrap">
 			<div class="moviecard__overlay">
 				<div class="moviecard__inneroverlay">
@@ -9,20 +9,37 @@
 						<li class="moviecard__genre">Thriller</li>
 						<li class="moviecard__genre">Adventure</li>
 					</ul>
-					<p class="moviecard__rating">8.5</p>
+					<p class="moviecard__rating">{{movie.vote_average}}</p>
 				</div>
 			</div>
-			<img class="moviecard__img" src="../assets/images/default.jpg" alt="">
+			<poster-image class="moviecard__img" :poster-data="posterData" />
 		</div>
-		<h2 class="moviecard__title">
-			Movie Title
-		</h2>
+		<h2 class="moviecard__title">{{movie.title}}</h2>
 	</a>
 </template>
 
 <script>
+import PosterImage from './PosterImage.vue';
+
 export default {
 	name: 'MovieCard',
+	components: {
+		'poster-image': PosterImage,
+	},
+	props: {
+		movie: Object,
+		config: Object,
+	},
+	computed: {
+		posterData() {
+			return {
+				baseUrl: this.config.images.secure_base_url,
+				posterSizes: this.config.images.poster_sizes,
+				imgPath: this.movie.poster_path,
+				altText: this.movie.title + ' Poster Image',
+			};
+		},
+	},
 }
 </script>
 
@@ -111,7 +128,7 @@ export default {
 		@extend %block;
 		margin-top: rem(15);
 		text-align: center;
-		font-size: rem(20);
+		font-size: rem(18);
 		font-family: font(montserrat);
 		font-weight: weight(semi-bold);
 		color: color-scheme(moviecard, title);

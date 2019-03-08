@@ -1,6 +1,6 @@
 <template>
 	<div class="moviesgrid">
-		<movie-card v-for="(item, index) in 12" :key="index" />
+		<movie-card v-for="movie in movies" :key="movie.id" :movie="movie" :config="config" />
 	</div>
 </template>
 
@@ -9,6 +9,10 @@ import MovieCard from './MovieCard.vue';
 
 export default {
 	name: 'MoviesGrid',
+	props: {
+		movies: Array,
+		config: Object,
+	},
 	components: {
 		'movie-card': MovieCard,
 	}
