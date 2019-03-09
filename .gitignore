@@ -4,6 +4,7 @@ Desktop.ini
 $RECYCLE.BIN/
 node_modules
 /dist
+keys.js
 
 # local env files
 .env.local

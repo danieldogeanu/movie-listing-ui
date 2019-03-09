@@ -16,6 +16,7 @@ import Header from './components/Header.vue';
 import SortBar from './components/SortBar.vue';
 import MoviesGrid from './components/MoviesGrid.vue';
 import Footer from './components/Footer.vue';
+import keys from '../keys.js';
 
 export default {
   name: 'app',
@@ -35,7 +36,7 @@ export default {
     'the-footer': Footer,
   },
   created() {
-    const API_KEY = '2b5d51509f0a6ce82c2f8965762ff228';
+    const API_KEY = keys.tmdb;
     fetch('https://api.themoviedb.org/3/configuration?api_key=' + API_KEY)
       .then(res => res.json())
       .then(json => this.moviesConfig = json);
