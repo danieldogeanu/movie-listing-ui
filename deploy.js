@@ -6,11 +6,11 @@ const config = {
 	user: FTP.user,
 	password: FTP.pass,
 	host: FTP.host,
-	port: 21,
+	port: FTP.port,
 	localRoot: './dist',
-	remoteRoot: '/',
+	remoteRoot: FTP.root,
 	include: ['.*', '*', 'dist/*'],
-	deconsteRemote: true,
+	deleteRemote: true,
 	forcePasv: true,
 };
 
