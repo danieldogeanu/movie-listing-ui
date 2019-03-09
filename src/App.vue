@@ -4,7 +4,10 @@
     <div class="app__container">
       <the-header :title="appTitle" />
       <sort-bar />
-      <movies-grid :movies="nowPlaying" :config="moviesConfig" :details="moviesDetails" />
+      <movies-grid 
+        :movies="nowPlaying" 
+        :config="moviesConfig" 
+        :details="moviesDetails" />
       <the-footer />
     </div>
   </main>

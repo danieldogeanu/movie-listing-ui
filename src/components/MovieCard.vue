@@ -3,12 +3,7 @@
 		<div class="moviecard__wrap">
 			<div class="moviecard__overlay">
 				<div class="moviecard__inneroverlay">
-					<ul class="moviecard__genres">
-						<li class="moviecard__genre">Action</li>
-						<li class="moviecard__genre">Science Fiction</li>
-						<li class="moviecard__genre">Thriller</li>
-						<li class="moviecard__genre">Adventure</li>
-					</ul>
+					<genres :genres="detail.genres" />
 					<p class="moviecard__rating">{{movie.vote_average}}</p>
 				</div>
 			</div>
@@ -20,11 +15,13 @@
 
 <script>
 import PosterImage from './PosterImage.vue';
+import Genres from './Genres.vue';
 
 export default {
 	name: 'MovieCard',
 	components: {
 		'poster-image': PosterImage,
+		'genres': Genres,
 	},
 	props: {
 		movie: Object,
@@ -47,12 +44,6 @@ export default {
 
 <style scoped lang="scss">
 @import '../styles/includes';
-
-%inneroverlay-text {
-	font-family: font(open-sans);
-	text-transform: uppercase;
-	line-height: 1;
-}
 
 %block {
 	display: block;
@@ -99,23 +90,12 @@ export default {
 		padding: rem(25);
 	}
 
-	&__genres {
-		list-style: none;
-		margin-bottom: rem(40);
-	}
-
-	&__genre {
-		@extend %inneroverlay-text;
-		margin-bottom: rem(15);
-		font-weight: weight(regular);
-		font-size: rem(14);
-		color: color-scheme(moviecard, genres);
-	}
-
 	&__rating {
-		@extend %inneroverlay-text;
+		font-family: font(open-sans);
 		font-weight: weight(semi-bold);
 		font-size: rem(38);
+		line-height: 1;
+		text-transform: uppercase;
 		color: color-scheme(moviecard, rating);
 	}
 
