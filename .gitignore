@@ -4,11 +4,12 @@ Desktop.ini
 $RECYCLE.BIN/
 node_modules
 /dist
-keys.js
 
 # local env files
 .env.local
 .env.*.local
+keys.js
+ftp.js
 
 # Log files
 npm-debug.log*
