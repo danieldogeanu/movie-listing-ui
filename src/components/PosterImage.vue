@@ -77,3 +77,16 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss" scoped>
+@import '../styles/includes';
+
+.posterimage {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: rem(6);
+	position: relative;
+	z-index: level(moviecard, img);
+}
+</style>

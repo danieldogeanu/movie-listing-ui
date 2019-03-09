@@ -3,11 +3,11 @@
 		<div class="moviecard__wrap">
 			<div class="moviecard__overlay">
 				<div class="moviecard__inneroverlay">
-					<genres :genres="detail.genres" />
+					<genres v-if="detail" :genres="detail.genres" />
 					<p class="moviecard__rating">{{movie.vote_average}}</p>
 				</div>
 			</div>
-			<poster-image class="moviecard__img" :poster-data="posterData" />
+			<poster-image v-if="posterData" :poster-data="posterData" />
 		</div>
 		<h2 class="moviecard__title">{{movie.title}}</h2>
 	</a>
@@ -97,13 +97,6 @@ export default {
 		line-height: 1;
 		text-transform: uppercase;
 		color: color-scheme(moviecard, rating);
-	}
-
-	&__img {
-		@extend %block--auto;
-		@extend %border-radius;
-		position: relative;
-		z-index: level(moviecard, img);
 	}
 
 	&__title {
