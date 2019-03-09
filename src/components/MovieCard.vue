@@ -29,8 +29,10 @@ export default {
 	props: {
 		movie: Object,
 		config: Object,
+		detail: Object,
 	},
 	computed: {
+		// Here we compose the data object to pass to the PosterImage component. 
 		posterData() {
 			return {
 				baseUrl: this.config.images.secure_base_url,

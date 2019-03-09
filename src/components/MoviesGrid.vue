@@ -1,6 +1,9 @@
 <template>
 	<div class="moviesgrid">
-		<movie-card v-for="movie in movies" :key="movie.id" :movie="movie" :config="config" />
+		<movie-card 
+			v-for="movie in movies" :key="movie.id" 
+			:movie="movie" :config="config" 
+			:detail="getMovieDetail(movie.id)" />
 	</div>
 </template>
 
@@ -12,9 +15,17 @@ export default {
 	props: {
 		movies: Array,
 		config: Object,
+		details: Array,
 	},
 	components: {
 		'movie-card': MovieCard,
+	},
+	methods: {
+		// Get the movie details and return a single movie object, matching the movie id.
+		// We're fairly sure we're going to be left with a single object in the array so we pop it out.
+		getMovieDetail(id) {
+			return this.details.filter(movie => movie.id === id).pop();
+		}
 	}
 }
 </script>
