@@ -1,5 +1,5 @@
 <template>
-	<ul class="moviecard__genres">
+	<ul v-if="genres" class="moviecard__genres">
 		<li class="moviecard__genre" 
 			v-for="genre in genres"
 			:key="genre.id"
