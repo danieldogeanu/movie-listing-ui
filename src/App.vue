@@ -24,6 +24,7 @@ export default {
       appTitle: 'Movies List',
       moviesConfig: {},
       nowPlaying: [],
+      moviesDetails: [],
     }
   },
   components: {
@@ -40,7 +41,15 @@ export default {
       .then(json => this.moviesConfig = json);
     fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=' + API_KEY)
       .then(res => res.json())
-      .then(json => this.nowPlaying = json.results);
+      .then(json => {
+        let results = json.results;
+        this.nowPlaying = results;
+        results.forEach(movie => {
+          fetch('https://api.themoviedb.org/3/movie/' + movie.id + '?api_key=' + API_KEY)
+            .then(res => res.json())
+            .then(json => this.moviesDetails.push(json));
+        });
+      });
   }
 }
 </script>
