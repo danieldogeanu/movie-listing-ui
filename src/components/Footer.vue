@@ -4,6 +4,9 @@
 			By <a class="footer__link" href="https://danieldogeanu.com/" target="_blank">Daniel Dogeanu</a>
 			for <a class="footer__link" href="https://www.zonedigital.com/" target="_blank" rel="nofollow noreferrer">Zone Digital</a>
 		</p>
+		<a class="footer__logo" href="https://www.themoviedb.org/" target="_blank" rel="nofollow noreferrer">
+			<img class="footer__img" src="../assets/images/tmdb-logo-blue.svg" alt="TMDb Logo" />
+		</a>
 	</footer>
 </template>
 
@@ -18,9 +21,12 @@ export default {
 
 .footer {
 	display: block;
-	margin: rem(60) 0;
+	margin: rem(120) 0 rem(40) 0;
 	padding: 0 rem(20);
 	text-align: center;
+	@include breakpoint(min, rem(481)) {
+		margin: rem(120) 0 rem(60) 0;
+	}
 
 	&__line {
 		font-family: font(open-sans);
@@ -42,6 +48,21 @@ export default {
 		&:hover {
 			color: color-scheme(footer, hover);
 		}
+	}
+
+	&__logo {
+		display: block;
+		opacity: .8;
+		width: rem(140);
+		margin: rem(20) auto;
+		@include breakpoint(min, rem(481)) {
+			width: rem(160);
+		}
+	}
+
+	&__img {
+		width: 100%;
+		height: auto;
 	}
 }
 </style>
