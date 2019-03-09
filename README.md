@@ -54,6 +54,23 @@ To lint and fix the files:
 npm run lint
 ```
 
+### Deploying
+If you wish to deploy to a server via FTP, you can do so by running:
+```
+npm run deploy
+```
+For the `deploy` command to work, you need to add an `ftp.js` file at the root of the project with the following content:
+```
+const FTP = {
+	user: 'your_ftp_username',
+	pass: 'your_ftp_password',
+	host: 'your_ftp_host',
+	root: '/', // your ftp directory
+	port: 21, // your ftp port
+};
+
+module.exports = FTP;
+```
 
 ### Customize Configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
