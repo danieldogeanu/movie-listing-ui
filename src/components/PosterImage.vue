@@ -1,7 +1,8 @@
 <template>
 	<img class="posterimage"
+				v-if="posterData"
 				:src="defaultImg"
-				:alt="alt"
+				:alt="altText"
 				:srcset="srcSet"
 				:sizes="imgSizes" />
 </template>
@@ -12,57 +13,67 @@ export default {
 	props: {
 		posterData: Object,
 	},
-	data() {
-		return {};
-	},
 	computed: {
-		alt() {
+		// Get the Alt text for the image.
+		altText() {
 			return this.posterData.altText || 'Image Not Found';
 		},
+		// Get the image with the smallest size to set it as default image.
 		defaultImg() {
 			return this.getImg(this.posterData.posterSizes[0]) || '';
 		},
+		// Get the srcset string.
 		srcSet() {
 			return this.getSrcSet() || '';
 		},
+		// Get the sizes string.
 		imgSizes() {
 			return this.getSizes() || '';
 		}
 	},
 	methods: {
+
+		// Compose the image URL.
 		getImg(size) {
-			let img = '';
 			if (this.posterData && size) {
-				img = this.posterData.baseUrl + size + this.posterData.imgPath;
+				return this.posterData.baseUrl + size + this.posterData.imgPath;
 			}
-			return img;
 		},
+
+		// Process all the poster sizes and return a string with all the images and sizes for the srcset attribute.
+		// We skip the 'original' and larger than 500px sizes, because we never need them.
 		getSrcSet() {
-			let srcSetArr = [];
-			this.posterData.posterSizes.forEach(size => {
-				if (size !== 'original') {
-					const strippedSize = size.replace('w', '');
-					if (Number(strippedSize) <= 500) {
-						const img = this.getImg(size);
-						srcSetArr.push(img + ' ' + strippedSize + 'w');
+			if (this.posterData) {
+				let srcSetArr = [];
+				this.posterData.posterSizes.forEach(size => {
+					if (size !== 'original') {
+						const strippedSize = size.replace('w', '');
+						if (Number(strippedSize) <= 500) {
+							srcSetArr.push(this.getImg(size) + ' ' + strippedSize + 'w');
+						}
 					}
-				}
-			});
-			return srcSetArr.join(', ');
+				});
+				return srcSetArr.join(', ');
+			}
 		},
+
+		// Process all the poster sizes and return a string with all the media queries for the sizes attribute.
+		// We skip the 'original' and larger than 500px sizes, because we never need them.
 		getSizes() {
-			let sizes = [];
-			this.posterData.posterSizes.forEach(size => {
-				if (size !== 'original') {
-					const strippedSize = size.replace('w', '');
-					if (Number(strippedSize) <= 500) {
-						const processedSize = (Number(strippedSize) !== 500) ? `(max-width: ${strippedSize}px) ${strippedSize}px` : '100vw';
-						sizes.push(processedSize);
+			if (this.posterData) {
+				let sizes = [];
+				this.posterData.posterSizes.forEach(size => {
+					if (size !== 'original') {
+						const strippedSize = size.replace('w', '');
+						if (Number(strippedSize) <= 500) {
+							sizes.push((Number(strippedSize) !== 500) ? `(max-width: ${strippedSize}px) ${strippedSize}px` : '100vw');
+						}
 					}
-				}
-			});
-			return sizes.join(', ');
+				});
+				return sizes.join(', ');
+			}
 		},
+
 	}
 }
 </script>
