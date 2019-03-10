@@ -3,9 +3,14 @@
     <sprite />
     <div class="app__container">
       <the-header :title="appTitle" />
-      <sort-bar />
+      <sort-bar 
+        :theKey="filterKey" 
+        :theDir="filterDir"
+        @keyChange="changeKey"
+        @dirChange="changeDir"
+      />
       <movies-grid 
-        :movies="nowPlaying" 
+        :movies="filteredMovies" 
         :config="moviesConfig" 
         :details="moviesDetails" />
       <the-footer />
@@ -29,7 +34,22 @@ export default {
       moviesConfig: {},
       nowPlaying: [],
       moviesDetails: [],
+      filterKey: 'popular',
+      filterDir: 'desc',
     }
+  },
+  computed: {
+
+    // Filter the nowPlaying movies according to the selected filterKey and filterDir.
+    filteredMovies() {
+      let filtered = this.nowPlaying.sort((a, b) => {
+        if (this.filterKey === 'popular') return a.popularity - b.popularity;
+        if (this.filterKey === 'rating') return a.vote_average - b.vote_average;
+      });
+      if (this.filterDir === 'asc') return filtered;
+      if (this.filterDir === 'desc') return filtered.reverse();
+    },
+
   },
   components: {
     'sprite': Sprite,
@@ -37,6 +57,21 @@ export default {
     'sort-bar': SortBar,
     'movies-grid': MoviesGrid,
     'the-footer': Footer,
+  },
+  methods: {
+
+    // When the keyChange event is triggered on the SortBar, 
+    // get the event value and set it as filterKey.
+    changeKey(value) {
+      this.filterKey = value;
+    },
+
+    // When the dirChange event is triggered on the SortBar, 
+    // get the event value and set it as filterDir.
+    changeDir(value) {
+      this.filterDir = value;
+    },
+
   },
   created() {
 
@@ -53,11 +88,14 @@ export default {
       .then(res => res.json())
       .then(json => {
         let results = json.results;
-        this.nowPlaying = results;
+
+        // Sort the initial results in descending order by popularity.
+        let sortedResults = results.sort((a, b) => a.popularity - b.popularity).reverse();
+        this.nowPlaying = sortedResults;
 
         // Third: Now that we have the Now Playing movies, let's loop through them and get the movie details for each movie.
         // This will be used later to access and display the genres for each movie.
-        results.forEach(movie => {
+        sortedResults.forEach(movie => {
           fetch('https://api.themoviedb.org/3/movie/' + movie.id + '?api_key=' + tmdb)
             .then(res => res.json())
             .then(json => this.moviesDetails.push(json));

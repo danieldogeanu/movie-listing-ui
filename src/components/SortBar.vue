@@ -1,17 +1,34 @@
 <template>
 	<div class="sortbar">
+
 		<div class="sortbar__sort">
-			<button class="sortbar__btn">Popular</button>
-			<button class="sortbar__btn">Rating</button>
+
+			<button class="sortbar__btn" 
+				:class="{'sortbar__btn--active': theKey === 'popular'}"
+				@click="requestKeyChange('popular')">Popular</button>
+
+			<button class="sortbar__btn" 
+				:class="{'sortbar__btn--active': theKey === 'rating'}"
+				@click="requestKeyChange('rating')">Rating</button>
+
 		</div>
+
 		<div class="sortbar__dir">
-			<button class="sortbar__btn--icon" title="Ascending">
+
+			<button class="sortbar__btn--icon" title="Ascending"
+				:class="{'sortbar__btn--active': theDir === 'asc'}"
+				@click="requestDirChange('asc')">
 				<icon name="chevron-up" />
 			</button>
-			<button class="sortbar__btn--icon" title="Descending">
+			
+			<button class="sortbar__btn--icon" title="Descending"
+				:class="{'sortbar__btn--active': theDir === 'desc'}"
+				@click="requestDirChange('desc')">
 				<icon name="chevron-down" />
 			</button>
+
 		</div>
+
 	</div>
 </template>
 
@@ -20,9 +37,28 @@ import Icon from './Icon.vue';
 
 export default {
 	name: 'SortBar',
+	props: {
+		theKey: String,
+		theDir: String,
+	},
 	components: {
 		'icon': Icon
-	}
+	},
+	methods: {
+
+		// Emit an event when any of the sort buttons are clicked 
+		// and pass the selected value to the parent component.
+		requestKeyChange(value) {
+			this.$emit('keyChange', value);
+		},
+
+		// Emit an event when any of the dir buttons are clicked 
+		// and pass the selected value to the parent component.
+		requestDirChange(value) {
+			this.$emit('dirChange', value);
+		},
+
+	},
 }
 </script>
 
@@ -50,6 +86,9 @@ export default {
 	}
 	&:hover {
 		color: color-scheme(sortbar, hover);
+	}
+	&:focus, &:active {
+		outline: none;
 	}
 }
 
@@ -88,6 +127,9 @@ export default {
 
 	&__btn {
 		@extend %sortbtn;
+		&--active {
+			color: color-scheme(sortbar, hover);
+		}
 		&--icon {
 			@extend %sortbtn;
 			@extend %sortbtn__icon;
