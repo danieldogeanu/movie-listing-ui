@@ -11,6 +11,8 @@
 				:class="{'sortbar__btn--active': theKey === 'rating'}"
 				@click="requestKeyChange('rating')">Rating</button>
 
+			<slider />
+
 		</div>
 
 		<div class="sortbar__dir">
@@ -34,6 +36,7 @@
 
 <script>
 import Icon from './Icon.vue';
+import Slider from './Slider.vue';
 
 export default {
 	name: 'SortBar',
@@ -42,7 +45,8 @@ export default {
 		theDir: String,
 	},
 	components: {
-		'icon': Icon
+		'icon': Icon,
+		'slider': Slider,
 	},
 	methods: {
 
@@ -112,6 +116,8 @@ export default {
 	margin-bottom: rem(20);
 
 	&__sort {
+		display: flex;
+		align-items: center;
 		padding: 0 rem(15);
 		@include breakpoint(min, rem(481)) {
 			padding: 0 rem(10);

@@ -78,6 +78,10 @@ $color-scheme: (
 		btn: rgba(color(blue, william), 0.5),
 		hover: rgba(color(blue, william), 0.9),
 	),
+	slider: (
+		track: rgba(color(blue, william), 0.1),
+		thumb: color(blue, boston),
+	),
 	moviecard: (
 		title: color(blue, william),
 		title-hover: darken(color(blue, william), 20%),
