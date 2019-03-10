@@ -42,12 +42,12 @@ export default {
 
     // Filter the nowPlaying movies according to the selected filterKey and filterDir.
     filteredMovies() {
-      let filtered = this.nowPlaying.sort((a, b) => {
+      let filtered = this.nowPlaying.slice().sort((a, b) => {
         if (this.filterKey === 'popular') return a.popularity - b.popularity;
         if (this.filterKey === 'rating') return a.vote_average - b.vote_average;
       });
-      if (this.filterDir === 'asc') return filtered;
       if (this.filterDir === 'desc') return filtered.reverse();
+      return filtered;
     },
 
   },
