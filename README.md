@@ -29,12 +29,7 @@ npm run build
 ```
 
 ### Testing
-To run all the tests for the project:
-```
-npm run test
-```
-
-To run only the unit tests:
+To run the unit tests:
 ```
 npm run test:unit
 ```
