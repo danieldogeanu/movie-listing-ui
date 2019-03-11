@@ -3,13 +3,13 @@
 		<div class="moviecard__wrap">
 			<div class="moviecard__overlay">
 				<div class="moviecard__inneroverlay">
-					<genres v-if="detail" :genres="detail.genres" />
-					<p class="moviecard__rating">{{movie.vote_average}}</p>
+					<genres v-if="genres" :genres="genres" />
+					<p class="moviecard__rating">{{rating}}</p>
 				</div>
 			</div>
-			<poster-image v-if="posterData" :poster-data="posterData" />
+			<poster-image v-if="posterData" :posterData="posterData" />
 		</div>
-		<h2 class="moviecard__title">{{movie.title}}</h2>
+		<h2 class="moviecard__title">{{title}}</h2>
 	</a>
 </template>
 
@@ -29,8 +29,23 @@ export default {
 		detail: Object,
 	},
 	computed: {
-		// Here we compose the data object to pass to the PosterImage component. 
 		posterData() {
+			return this.getPosterData() || {};
+		},
+		rating() {
+			return this.getRating() || 0;
+		},
+		genres() {
+			return this.getGenres() || [];
+		},
+		title() {
+			return this.getTitle() || '';
+		}
+	},
+	methods: {
+
+		// Compose the data object to pass to the PosterImage component.
+		getPosterData() {
 			return {
 				baseUrl: this.config.images.secure_base_url,
 				posterSizes: this.config.images.poster_sizes,
@@ -38,6 +53,19 @@ export default {
 				altText: this.movie.title + ' Poster Image',
 			};
 		},
+
+		getRating() {
+			if (this.movie) return this.movie.vote_average;
+		},
+
+		getGenres() {
+			if (this.detail) return this.detail.genres;
+		},
+
+		getTitle() {
+			if (this.movie) return this.movie.title;
+		}
+
 	},
 }
 </script>
