@@ -1,8 +1,8 @@
 <template>
 	<div class="moviesgrid">
 		<movie-card 
-			v-for="movie in movies" :key="movie.id" 
-			:movie="movie" :config="config" 
+			v-for="movie in compMovies" :key="movie.id" 
+			:movie="movie" :config="compConfig" 
 			:detail="getMovieDetail(movie.id)" />
 	</div>
 </template>
@@ -12,21 +12,41 @@ import MovieCard from './MovieCard.vue';
 
 export default {
 	name: 'MoviesGrid',
+	components: {
+		'movie-card': MovieCard,
+	},
 	props: {
 		movies: Array,
 		config: Object,
 		details: Array,
 	},
-	components: {
-		'movie-card': MovieCard,
+	computed: {
+		compMovies() {
+			return this.getMovies();
+		},
+		compConfig() {
+			return this.getConfig();
+		},
 	},
 	methods: {
+		
 		// Get the movie details and return a single movie object, matching the movie id.
 		// We're fairly sure we're going to be left with a single object in the array so we pop it out.
 		getMovieDetail(id) {
 			return this.details.filter(movie => movie.id === id).pop();
-		}
-	}
+		},
+
+		// Get the movies array or return an empty array.
+		getMovies() {
+			return this.movies || [];
+		},
+
+		// Get the config object or return an empty object.
+		getConfig() {
+			return this.config || {};
+		},
+
+	},
 }
 </script>
 
