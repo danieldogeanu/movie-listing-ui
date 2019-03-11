@@ -35,7 +35,7 @@ export default {
 }
 
 .slider {
-	display: flex;
+	display: none;
 	align-items: center;
 	margin: 0 rem(5);
 	@include breakpoint(min, rem(481)) {
@@ -43,6 +43,10 @@ export default {
 	}
 	@include breakpoint(min, rem(601)) {
 		margin: 0 rem(20);
+	}
+
+	&--active {
+		display: flex;
 	}
 
 	&__label {

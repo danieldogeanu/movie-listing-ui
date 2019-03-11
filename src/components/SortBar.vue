@@ -13,7 +13,9 @@
 					:class="{'sortbar__btn--active': theKey === 'rating'}"
 					@click="requestKeyChange('rating')">Rating</button>
 
-				<slider class="sortbar--hide-mobile" />
+				<slider class="sortbar--hide-mobile" 
+					:class="{'slider--active': theKey === 'rating'}" 
+				/>
 
 			</div>
 
@@ -35,8 +37,11 @@
 
 		</div><!-- sortbar__inner -->
 
-		<div class="sortbar__under">
-			<slider class="sortbar--hide-desktop slider--mobile" />
+		<div class="sortbar__under" 
+			:class="{'sortbar__under--active': theKey === 'rating'}">
+			<slider class="sortbar--hide-desktop slider--mobile" 
+				:class="{'slider--active': theKey === 'rating'}"
+			/>
 		</div><!-- sortbar__under -->
 
 	</div><!-- sortbar -->
@@ -182,7 +187,7 @@ export default {
 	}
 
 	&__under {
-		display: flex;
+		display: none;
 		justify-content: center;
 		margin: rem(20) 0 rem(15) 0;
 		padding: 0 rem(15);
@@ -198,6 +203,9 @@ export default {
 		}
 		@include breakpoint(min, rem(741)) {
 			margin-top: 0;
+		}
+		&--active {
+			display: flex;
 		}
 	}
 
