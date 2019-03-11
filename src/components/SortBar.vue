@@ -1,37 +1,45 @@
 <template>
 	<div class="sortbar">
 
-		<div class="sortbar__sort">
+		<div class="sortbar__inner">
 
-			<button class="sortbar__btn" 
-				:class="{'sortbar__btn--active': theKey === 'popular'}"
-				@click="requestKeyChange('popular')">Popular</button>
+			<div class="sortbar__sort">
 
-			<button class="sortbar__btn" 
-				:class="{'sortbar__btn--active': theKey === 'rating'}"
-				@click="requestKeyChange('rating')">Rating</button>
+				<button class="sortbar__btn" 
+					:class="{'sortbar__btn--active': theKey === 'popular'}"
+					@click="requestKeyChange('popular')">Popular</button>
 
-			<slider />
+				<button class="sortbar__btn" 
+					:class="{'sortbar__btn--active': theKey === 'rating'}"
+					@click="requestKeyChange('rating')">Rating</button>
 
-		</div>
+				<slider class="sortbar--hide-mobile" />
 
-		<div class="sortbar__dir">
+			</div>
 
-			<button class="sortbar__btn--icon" title="Ascending"
-				:class="{'sortbar__btn--active': theDir === 'asc'}"
-				@click="requestDirChange('asc')">
-				<icon name="chevron-up" />
-			</button>
-			
-			<button class="sortbar__btn--icon" title="Descending"
-				:class="{'sortbar__btn--active': theDir === 'desc'}"
-				@click="requestDirChange('desc')">
-				<icon name="chevron-down" />
-			</button>
+			<div class="sortbar__dir">
 
-		</div>
+				<button class="sortbar__btn--icon" title="Ascending"
+					:class="{'sortbar__btn--active': theDir === 'asc'}"
+					@click="requestDirChange('asc')">
+					<icon name="chevron-up" />
+				</button>
+				
+				<button class="sortbar__btn--icon" title="Descending"
+					:class="{'sortbar__btn--active': theDir === 'desc'}"
+					@click="requestDirChange('desc')">
+					<icon name="chevron-down" />
+				</button>
 
-	</div>
+			</div>
+
+		</div><!-- sortbar__inner -->
+
+		<div class="sortbar__under">
+			<slider class="sortbar--hide-desktop slider--mobile" />
+		</div><!-- sortbar__under -->
+
+	</div><!-- sortbar -->
 </template>
 
 <script>
@@ -111,12 +119,39 @@ export default {
 
 .sortbar {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	flex-direction: column;
+	width: 100%;
 	margin-bottom: rem(20);
+
+	&__inner {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;		
+	}
+
+	&__under {
+		display: flex;
+		justify-content: center;
+		margin: rem(20) 0 rem(15) 0;
+		padding: 0 rem(15);
+		@include breakpoint(min, rem(301)) {
+			padding: 0 rem(10);
+		}
+		@include breakpoint(min, rem(481)) {
+			justify-content: flex-start;
+			margin-top: rem(10);
+		}
+		@include breakpoint(min, rem(601)) {
+			padding: 0;
+		}
+		@include breakpoint(min, rem(741)) {
+			margin-top: 0;
+		}
+	}
 
 	&__sort {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		padding: 0 rem(15);
 		@include breakpoint(min, rem(481)) {
@@ -128,7 +163,22 @@ export default {
 	}
 
 	&__dir {
-		padding: 0 rem(15);
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: flex-end;
+		flex-basis: rem(100);
+		width: rem(100);
+		padding: 0 rem(10) 0 0;
+		@include breakpoint(min, rem(481)) {
+			flex-basis: rem(100);
+			width: rem(100);
+			padding: 0 rem(10) 0 0;
+		}
+		@include breakpoint(min, rem(601)) {
+			flex-basis: rem(110);
+			width: rem(110);
+			padding: 0 rem(15) 0 0;
+		}
 	}
 
 	&__btn {
@@ -143,6 +193,17 @@ export default {
 			.icon {
 				@extend %sortbtn__icon;
 			}
+		}
+	}
+
+	@include breakpoint(max, rem(740)) {
+		&--hide-mobile {
+			display: none;
+		}
+	}
+	@include breakpoint(min, rem(741)) {
+		&--hide-desktop {
+			display: none;
 		}
 	}
 }

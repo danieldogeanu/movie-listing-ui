@@ -59,6 +59,7 @@ export default {
 
 	&__value {
 		@extend %label;
+		min-width: rem(30);
 		font-weight: weight(semi-bold);
 		font-size: rem(14);
 		@include breakpoint(min, rem(481)) {
@@ -95,6 +96,8 @@ export default {
     }
 
 		& { // Slider Track
+			// NOTE: We use separate() here because the browser won't know which rule to choose
+			// if we use @extend and the properties are grouped with commas, instead of on their own.
 			@include separate((
 				'::-webkit-slider-runnable-track',
 				'::-moz-range-track',
@@ -150,6 +153,14 @@ export default {
 			}
 			&::-ms-thumb {
 				margin-bottom: rem(-12) !important;
+			}
+		}
+	}
+
+	@include breakpoint(max, rem(300)) {
+		&--mobile {
+			input[type=range] {
+				width: 100%;
 			}
 		}
 	}
