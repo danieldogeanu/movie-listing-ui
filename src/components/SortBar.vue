@@ -79,17 +79,19 @@ export default {
 
 %sortbtn {
 	cursor: pointer;
-	margin: 0 rem(5);
+	margin: rem(6) rem(10);
 	border: 0 none;
 	background: transparent;
 	font-family: font(open-sans);
 	font-weight: weight(regular);
-	font-size: rem(12);
+	font-size: rem(13);
 	text-transform: uppercase;
 	color: color-scheme(sortbar, btn);
 	transition: color .2s ease;
-	@include breakpoint(min, rem(481)) {
+	@include breakpoint(min, rem(311)) {
 		margin: 0 rem(10);
+	}
+	@include breakpoint(min, rem(481)) {
 		font-size: rem(14);
 	}
 	@include breakpoint(min, rem(601)) {
@@ -129,34 +131,11 @@ export default {
 		align-items: center;		
 	}
 
-	&__under {
-		display: flex;
-		justify-content: center;
-		margin: rem(20) 0 rem(15) 0;
-		padding: 0 rem(15);
-		@include breakpoint(min, rem(301)) {
-			padding: 0 rem(10);
-		}
-		@include breakpoint(min, rem(481)) {
-			justify-content: flex-start;
-			margin-top: rem(10);
-		}
-		@include breakpoint(min, rem(601)) {
-			padding: 0;
-		}
-		@include breakpoint(min, rem(741)) {
-			margin-top: 0;
-		}
-	}
-
 	&__sort {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		padding: 0 rem(15);
-		@include breakpoint(min, rem(481)) {
-			padding: 0 rem(10);
-		}
+		padding: 0 rem(10);
 		@include breakpoint(min, rem(601)) {
 			padding: 0;
 		}
@@ -165,10 +144,16 @@ export default {
 	&__dir {
 		display: flex;
 		flex-wrap: nowrap;
-		justify-content: flex-end;
+		flex-direction: column;
+		align-items: flex-end;
 		flex-basis: rem(100);
 		width: rem(100);
 		padding: 0 rem(10) 0 0;
+		@include breakpoint(min, rem(311)) {
+			flex-direction: row;
+			align-items: center;
+			justify-content: flex-end;
+		}
 		@include breakpoint(min, rem(481)) {
 			flex-basis: rem(100);
 			width: rem(100);
@@ -193,6 +178,26 @@ export default {
 			.icon {
 				@extend %sortbtn__icon;
 			}
+		}
+	}
+
+	&__under {
+		display: flex;
+		justify-content: center;
+		margin: rem(20) 0 rem(15) 0;
+		padding: 0 rem(15);
+		@include breakpoint(min, rem(301)) {
+			padding: 0 rem(10);
+		}
+		@include breakpoint(min, rem(481)) {
+			justify-content: flex-start;
+			margin-top: rem(10);
+		}
+		@include breakpoint(min, rem(601)) {
+			padding: 0;
+		}
+		@include breakpoint(min, rem(741)) {
+			margin-top: 0;
 		}
 	}
 

@@ -157,7 +157,7 @@ export default {
 		}
 	}
 
-	@include breakpoint(max, rem(300)) {
+	@include breakpoint(max, rem(310)) {
 		&--mobile {
 			input[type=range] {
 				width: 100%;
