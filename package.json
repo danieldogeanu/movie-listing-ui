@@ -28,6 +28,7 @@
     "ftp-deploy": "^2.3.1",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
+    "sinon": "^7.2.7",
     "vue-template-compiler": "^2.5.21"
   }
 }
