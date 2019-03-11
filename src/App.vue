@@ -4,10 +4,11 @@
     <div class="app__container">
       <the-header :title="appTitle" />
       <sort-bar 
-        :theKey="filterKey" 
-        :theDir="filterDir"
+        :theKey="sortKey" 
+        :theDir="sortDir"
         @keyChange="changeKey"
         @dirChange="changeDir"
+        @ratingChanged="changeRating"
       />
       <movies-grid 
         :movies="filteredMovies" 
@@ -34,20 +35,21 @@ export default {
       moviesConfig: {},
       nowPlaying: [],
       moviesDetails: [],
-      filterKey: 'popular',
-      filterDir: 'desc',
+      sortKey: 'popular',
+      sortDir: 'desc',
+      filterRating: 3,
     }
   },
   computed: {
 
-    // Filter the nowPlaying movies according to the selected filterKey and filterDir.
+    // Sort the nowPlaying movies according to the selected sortKey, sortDir and filter them by filterRating.
     filteredMovies() {
-      let filtered = this.nowPlaying.slice().sort((a, b) => {
-        if (this.filterKey === 'popular') return a.popularity - b.popularity;
-        if (this.filterKey === 'rating') return a.vote_average - b.vote_average;
+      let sorted = this.nowPlaying.slice().sort((a, b) => {
+        if (this.sortKey === 'popular') return a.popularity - b.popularity;
+        if (this.sortKey === 'rating') return a.vote_average - b.vote_average;
       });
-      if (this.filterDir === 'desc') return filtered.reverse();
-      return filtered;
+      if (this.sortDir === 'desc') sorted.reverse();
+      return sorted.filter(movie => movie.vote_average > this.filterRating);
     },
 
   },
@@ -61,15 +63,21 @@ export default {
   methods: {
 
     // When the keyChange event is triggered on the SortBar, 
-    // get the event value and set it as filterKey.
+    // get the event value and set it as sortKey.
     changeKey(value) {
-      this.filterKey = value;
+      this.sortKey = value;
     },
 
     // When the dirChange event is triggered on the SortBar, 
-    // get the event value and set it as filterDir.
+    // get the event value and set it as sortDir.
     changeDir(value) {
-      this.filterDir = value;
+      this.sortDir = value;
+    },
+
+    // When the ratingChanged event is triggered on the SortBar,
+    // get the event value and set it as filterRating.
+    changeRating(value) {
+      this.filterRating = Number(value);
     },
 
   },

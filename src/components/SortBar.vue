@@ -15,7 +15,8 @@
 
 				<slider class="sortbar--hide-mobile" 
 					:class="{'slider--active': theKey === 'rating'}" 
-				/>
+					:minRating="minRating"
+					@ratingChange="changeRating" />
 
 			</div>
 
@@ -41,7 +42,8 @@
 			:class="{'sortbar__under--active': theKey === 'rating'}">
 			<slider class="sortbar--hide-desktop slider--mobile" 
 				:class="{'slider--active': theKey === 'rating'}"
-			/>
+				:minRating="minRating"
+				@ratingChange="changeRating" />
 		</div><!-- sortbar__under -->
 
 	</div><!-- sortbar -->
@@ -56,6 +58,11 @@ export default {
 	props: {
 		theKey: String,
 		theDir: String,
+	},
+	data() {
+		return {
+			minRating: 3
+		};
 	},
 	components: {
 		'icon': Icon,
@@ -74,6 +81,14 @@ export default {
 		requestDirChange(value) {
 			this.$emit('dirChange', value);
 		},
+
+		// When the ratingChange event is triggered on the Slider,
+		// get the event value and set it as minRating. We also have to
+		// emit a new event to pass the value further to the parent component.
+		changeRating(value) {
+			this.minRating = Number(value);
+			this.$emit('ratingChanged', value);
+    },
 
 	},
 }

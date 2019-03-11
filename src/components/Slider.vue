@@ -3,23 +3,39 @@
 		<label class="slider__label" for="slider__input">Min: </label>
 		<input type="range" 
 			id="slider__input" class="slider__input" 
-			min="0" max="10" step="0.5" v-model="value" />
-		<label class="slider__value" for="slider__input">{{valuePadded}}</label>
+			min="0" max="10" step="0.5" v-model="rangeVal" 
+			@input="requestRatingChange()" />
+		<label class="slider__value" for="slider__input">{{formatted}}</label>
 	</div><!-- slider -->
 </template>
 
 <script>
 export default {
 	name: 'Slider',
+	props: {
+		minRating: Number,
+	},
 	data() {
 		return {
-			value: 3,
+			rangeVal: this.minRating,
 		};
 	},
 	computed: {
-		valuePadded() {
-			return Number(this.value).toFixed(1);
+
+		// Format the rangeVal to always have a decimal place.
+		formatted() {
+			return Number(this.rangeVal).toFixed(1);
 		}
+
+	},
+	methods: {
+		
+		// Emit an event when the value of the range input changed 
+		// and pass the value to the parent component.
+		requestRatingChange() {
+			this.$emit('ratingChange', this.rangeVal);
+		},
+
 	},
 }
 </script>
