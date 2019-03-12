@@ -86,14 +86,29 @@ export default {
     // Fetch all the data required when the component is first created.
     // By doing so, we call the TMDb API only once.
 
+    // Check the response status and log the error if necessary.
+    function checkResponse(res) {
+      if (res.status !== 200) {
+        console.error('Looks like there was a problem with the request. Fetch response status code: ', res.status);
+        return;
+      }
+    }
+
     // First: Let's get the configuration object, so we can use it later to build image URLs.
     fetch('https://api.themoviedb.org/3/configuration?api_key=' + tmdb)
-      .then(res => res.json())
-      .then(json => this.moviesConfig = json);
+      .then(res => {
+        checkResponse(res);
+        return res.json();
+      })
+      .then(json => this.moviesConfig = json)
+      .catch(err => console.error('Fetch Error: ', err));
 
     // Second: Let's get the list with the Now Playing movies.
     fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=' + tmdb)
-      .then(res => res.json())
+      .then(res => {
+        checkResponse(res);
+        return res.json();
+      })
       .then(json => {
         let results = json.results;
 
@@ -105,10 +120,15 @@ export default {
         // This will be used later to access and display the genres for each movie.
         sortedResults.forEach(movie => {
           fetch('https://api.themoviedb.org/3/movie/' + movie.id + '?api_key=' + tmdb)
-            .then(res => res.json())
-            .then(json => this.moviesDetails.push(json));
+            .then(res => {
+              checkResponse(res);
+              return res.json();
+            })
+            .then(json => this.moviesDetails.push(json))
+            .catch(err => console.error('Fetch Error: ', err));
         });
-      });
+      })
+      .catch(err => console.error('Fetch Error: ', err));
 
   }
 }

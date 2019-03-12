@@ -7,4 +7,10 @@ describe('Icon.vue', () => {
 
 		expect(wrapper.name()).toMatch('Icon');
 	});
+
+	it('contains icon class', () => {
+		const wrapper = shallowMount(Icon);
+
+		expect(wrapper.classes('icon')).toBe(true);
+	});
 });
