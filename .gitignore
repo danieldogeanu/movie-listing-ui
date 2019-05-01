@@ -8,7 +8,7 @@ node_modules
 # local env files
 .env.local
 .env.*.local
-keys.js
+api-key.js
 ftp.js
 
 # Log files

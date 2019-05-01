@@ -29,7 +29,7 @@ import SortBar from './components/SortBar.vue';
 import ErrorState from './components/ErrorState.vue';
 import MoviesGrid from './components/MoviesGrid.vue';
 import Footer from './components/Footer.vue';
-import tmdb from './tmdb.js';
+import ApiKey from './api-key.js';
 
 export default {
   name: 'app',
@@ -117,7 +117,7 @@ export default {
     }
 
     // First: Let's get the configuration object, so we can use it later to build image URLs.
-    fetch('https://api.themoviedb.org/3/configuration?api_key=' + tmdb)
+    fetch('https://api.themoviedb.org/3/configuration?api_key=' + ApiKey)
       .then(res => {
         checkResponse(res);
         return res.json();
@@ -133,7 +133,7 @@ export default {
       });
 
     // Second: Let's get the list with the Now Playing movies.
-    fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=' + tmdb)
+    fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=' + ApiKey)
       .then(res => {
         checkResponse(res);
         return res.json();
@@ -148,7 +148,7 @@ export default {
         // Third: Now that we have the Now Playing movies, let's loop through them and get the movie details for each movie.
         // This will be used later to access and display the genres for each movie.
         sortedResults.forEach(movie => {
-          fetch('https://api.themoviedb.org/3/movie/' + movie.id + '?api_key=' + tmdb)
+          fetch('https://api.themoviedb.org/3/movie/' + movie.id + '?api_key=' + ApiKey)
             .then(res => {
               checkResponse(res);
               return res.json();
