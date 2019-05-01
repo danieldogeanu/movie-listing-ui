@@ -4,12 +4,29 @@ Vue.JS Front End Challenge
 
 ### [See Live Preview Here](https://movieslist.ddev.ro/)
 
+## Brief
+Use the TMDb API to display a list of Now Playing movies, allowing the user to filter by rating or popularity.
+
+### Requirements:
+- Display a list of movies, each showing their title, genres and poster image.
+- The movies should be ordered by popularity (most popular first - `popularity` property).
+- Movies should also be filterable by their rating (`vote_average` property). i.e. If rating was set to 5, you would expect to see all movies with a rating of 5 or higher.
+- The input API's should be called only once.
+
 ## Project Setup
 
 ### Install Project
 To install the project you'll need to have NodeJS installed on your machine and run the following command:
 ```
 npm install
+```
+
+### Add API Key
+To be able to run the app and get data from the server, you'll need an [TMDb account](https://www.themoviedb.org/account/signup), to request an API key. Once you are registered, go to `Account Settings` and click `API` in the sidebar.
+
+Once you've got your API key, create an `api-key.js` file at the root of the project and add your API key like so:
+```
+export default 'your_api_key_here';
 ```
 
 ### Launch Development Server

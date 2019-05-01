@@ -29,7 +29,7 @@ import SortBar from './components/SortBar.vue';
 import ErrorState from './components/ErrorState.vue';
 import MoviesGrid from './components/MoviesGrid.vue';
 import Footer from './components/Footer.vue';
-import ApiKey from './api-key.js';
+import ApiKey from '../api-key.js';
 
 export default {
   name: 'app',
