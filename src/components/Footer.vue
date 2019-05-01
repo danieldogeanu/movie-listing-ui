@@ -2,7 +2,6 @@
 	<footer class="footer">
 		<p class="footer__line">
 			By <a class="footer__link" href="https://danieldogeanu.com/" target="_blank">Daniel Dogeanu</a>
-			for <a class="footer__link" href="https://www.zonedigital.com/" target="_blank" rel="nofollow noreferrer">Zone Digital</a>
 		</p>
 		<a class="footer__logo" href="https://www.themoviedb.org/" target="_blank" rel="nofollow noreferrer">
 			<img class="footer__img" src="../assets/images/tmdb-logo-blue.svg" alt="TMDb Logo" />
