@@ -1,10 +1,8 @@
 # Movie Listing UI
 
-Front End Challenge for [Zone Digital](https://www.zonedigital.com/)
+Vue.JS Front End Challenge
 
 ### [See Live Preview Here](https://movieslist.ddev.ro/)
-
-### [See Challenge Description Here](https://zone.github.io/frontend/movie-listing-ui)
 
 ## Project Setup
 
