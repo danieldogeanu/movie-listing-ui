@@ -4,7 +4,7 @@
 
 Vue.JS Front End Challenge
 
-### See Live Preview Here: [movieslist.ddsv.eu](https://movieslist.ddsv.eu/)
+### See Live Preview Here: [challenges.ddsv.eu/movieslist/](https://challenges.ddsv.eu/movieslist/)
 
 ## Brief
 Use the TMDb API to display a list of Now Playing movies, allowing the user to filter by rating or popularity.
